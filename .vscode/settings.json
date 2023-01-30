@@ -13,5 +13,15 @@
   "stylelint.enable": true,
   "javascript.format.enable": false,
   "eslint.alwaysShowStatus": true,
-  "files.autoSave": "onFocusChange"
+  "files.autoSave": "onFocusChange",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.tree.indent": 20,
+  "workbench.colorCustomizations": {
+    "tree.indentGuidesStroke": "#ff5683"
+  },
+  "editor.tokenColorCustomizations": {
+    "comments": "#00ffe1"
+  }
 }

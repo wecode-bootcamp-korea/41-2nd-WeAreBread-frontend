@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import Main from './pages/Main/Main';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
-import ProductList from './pages/ProductList/ProductList';
 import Footer from './components/Footer/Footer';
 import RandomImg from './pages/RandomImg/RandomImg';
 
