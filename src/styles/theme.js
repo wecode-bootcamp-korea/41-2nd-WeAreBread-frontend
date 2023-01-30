@@ -1,7 +1,7 @@
 const color = {
   ivory: '#F2D399',
   yellow: '#F2AF5C',
-  brown: 'D9814E',
+  brown: '#D9814E',
   redBrown: '#BF522A',
   navy: '#004AAD',
   gray: '#F2F2F2',
@@ -10,14 +10,14 @@ const color = {
 const common = {
   flexCenter: `
     display: flex;
-    justify-contents: center;
+    justify-content: center;
     align-items: center;
   `,
 
   flexCenterColumn: `
     display: flex;
     flex-direction: column;
-    justify-contents: center;
+    justify-content: center;
     align-items: center;
   `,
 };
