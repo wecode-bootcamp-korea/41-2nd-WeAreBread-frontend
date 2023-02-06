@@ -26,6 +26,6 @@ const MoveToTopIcon = styled(BsArrowUpCircleFill)`
   cursor: pointer;
 
   &:hover {
-    color: #1e5858;
+    color: gray;
   }
 `;
