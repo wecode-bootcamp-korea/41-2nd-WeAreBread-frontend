@@ -64,10 +64,12 @@ const MainTitle = styled.h1`
   box-shadow: 8px 5px 5px rgb(0, 0, 0, 0.3);
   -webkit-text-stroke: 1px #1e5858;
 `;
+
 const MoveToRandom = styled(Link)`
   ${({ theme }) => theme.common.flexCenter}
   width: 100px;
   height: 50px;
+  margin-top: 20px;
   background-color: #1e5858;
   color: white;
   font-size: 25px;
