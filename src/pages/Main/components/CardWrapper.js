@@ -39,7 +39,7 @@ const settings = {
 const StyledSlider = styled(Slider)`
   position: relative;
   .slick-arrow::before {
-    font-size: 55px;
+    font-size: 40px;
     color: lightgray;
   }
   .slick-prev::before {
@@ -103,6 +103,7 @@ const DetailBtn = styled.button`
   font-size: ${({ theme: { fontSizes } }) => fontSizes.m};
   border: none;
   border-radius: 18px;
+
   &:hover {
     background-color: #1e5858;
     color: white;
