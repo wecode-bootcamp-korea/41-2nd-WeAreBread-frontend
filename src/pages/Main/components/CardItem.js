@@ -8,7 +8,7 @@ const CardItem = ({ el }) => {
 
   return (
     <CardWrapper key={id}>
-      <LinkToDetail to={'/productList/' + id}>
+      <LinkToDetail to={'/productDetail/' + id}>
         <Photo src={imgUrl} alt="사진" />
         <StoreInfoSection className="hovered">
           <InfoTitle>{name}</InfoTitle>
