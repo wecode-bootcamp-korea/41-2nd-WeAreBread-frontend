@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { AiFillStar } from 'react-icons/ai';
+import { BsHeartFill } from 'react-icons/bs';
 import styled from 'styled-components';
 
 const CardItem = ({ el }) => {
@@ -16,16 +18,24 @@ const CardItem = ({ el }) => {
           <StoreInfoLine />
           <StoreReviewSection>"{review}"</StoreReviewSection>
           <StoreRating>
-            <Star>✭</Star>
+            <Star>
+              <StarIcon />
+            </Star>
             <Rating>{score}</Rating>
-            <Heart>❤️</Heart>
+            <Heart>
+              <HeartIcon />
+            </Heart>
             <Rating>{like}</Rating>
           </StoreRating>
         </StoreInfoSection>
         <RatingSection className="notHovered">
-          <Star>✭</Star>
+          <Star>
+            <StarIcon />
+          </Star>
           <Rating>{score}</Rating>
-          <Heart>❤️</Heart>
+          <Heart>
+            <HeartIcon />
+          </Heart>
           <Rating>{like}</Rating>
         </RatingSection>
       </LinkToDetail>
@@ -51,6 +61,8 @@ const LinkToDetail = styled(Link)`
 
     .notHovered {
       visibility: hidden;
+      display: flex;
+      align-items: center;
     }
   }
 `;
@@ -93,6 +105,11 @@ const Star = styled.span`
   color: orange;
 `;
 
+const StarIcon = styled(AiFillStar)`
+  position: relative;
+  top: 1px;
+`;
+
 const Rating = styled.span`
   margin-left: 5px;
   color: white;
@@ -101,6 +118,12 @@ const Rating = styled.span`
 const Heart = styled.span`
   margin-left: 10px;
   font-size: ${({ theme: { fontSizes } }) => fontSizes.m};
+`;
+
+const HeartIcon = styled(BsHeartFill)`
+  position: relative;
+  top: 2px;
+  color: red;
 `;
 
 const StoreInfoSection = styled.div`
