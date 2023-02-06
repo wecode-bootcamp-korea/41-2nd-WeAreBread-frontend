@@ -32,6 +32,7 @@ export default Main;
 const MainContainer = styled.div`
   ${({ theme }) => theme.common.flexCenterColumn}
   width: 100%;
+  padding-top: 60px;
   min-height: calc(100vh - 206px);
   background-color: #f0f0f0;
 `;
