@@ -3,29 +3,6 @@ import styled from 'styled-components';
 
 const RandomImg = () => {
   const [currentImageNum, setCurrentImageNum] = useState(1);
-  const imgTitle = [
-    '파이',
-    '잠봉뵈르',
-    '와플',
-    '와플',
-    '로터스 쿠키',
-    '동물쿠키',
-    '도넛',
-    '도넛',
-    '샌드위치',
-    '컵케이크',
-    '건포도 컵케이크',
-    '크로와상',
-    '크로와상',
-    '마카롱',
-    '마카롱',
-    '프레첼',
-    '도넛',
-    '소금빵',
-    '통밀빵',
-    '당근케이크',
-    '치즈케이크',
-  ];
 
   const changeBackground = () => {
     setCurrentImageNum(Math.floor(Math.random() * imgTitle.length));
@@ -73,3 +50,27 @@ const ImgTitle = styled.p`
   font-size: 50px;
   font-weight: 700;
 `;
+
+const imgTitle = [
+  '파이',
+  '잠봉뵈르',
+  '와플',
+  '와플',
+  '로터스 쿠키',
+  '동물쿠키',
+  '도넛',
+  '도넛',
+  '샌드위치',
+  '컵케이크',
+  '건포도 컵케이크',
+  '크로와상',
+  '크로와상',
+  '마카롱',
+  '마카롱',
+  '프레첼',
+  '도넛',
+  '소금빵',
+  '통밀빵',
+  '당근케이크',
+  '치즈케이크',
+];
