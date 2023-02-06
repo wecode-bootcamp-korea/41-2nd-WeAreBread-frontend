@@ -21,7 +21,7 @@ const RandomImg = () => {
       <RandomTitle>이거 어때?</RandomTitle>
       <Wrapper
         src={`/images/bread${currentImageNum}.jpg`}
-        alt=""
+        alt="빵 랜덤 이미지"
         onClick={stopRandomGame}
       />
       <ImgTitle>{imgTitle[currentImageNum]}</ImgTitle>
@@ -38,7 +38,7 @@ const Wrapper = styled.img`
   animation: fadeIn 0.5s;
 `;
 
-const RandomTitle = styled.h1`
+const RandomTitle = styled.h2`
   margin: 30px;
   font-size: 30px;
   font-weight: 700;
