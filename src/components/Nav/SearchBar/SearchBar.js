@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 import RecentList from './RecentList';
 import theme from '../../../styles/theme';
+import SuggestionLists from './SuggestionLists';
 
 const SearchBar = () => {
   const [isFocus, setIsFocus] = useState(false);
@@ -77,12 +78,70 @@ const SearchBar = () => {
     localStorage.setItem('recentSearch', JSON.stringify(recentSearch));
   }, [recentSearch]);
 
+  //**Todo
+  // 통신 로직 줄이기
+  // 초성 검색이나 자음검색시 검색제안은 배제
+  // 가게 or 주소 문자열에 자음 or 모음이 없다는 전제
+  // 초성 중성 종성 예상 검색제안도 배제
+  // 1. searchText의 끝문자검사해서 자음이나 모음이 아닐때 통신하기
+  // 2. 공백을 구분하여 배열로 관리
+  // ex) serchText = '서울 식빵'
+  // => ['서울', '식빵'][0]으로 첫통신
+  // => ['서울', '식빵'][1]로 첫통신 때 받은 데이터를 필터링
+  // '가'.charCodeAt() => 44032
+  // '힟'.charCodeAt() => 55199
+
+  const [searchTexts, setSearchTexts] = useState([]);
+  const [suggestionLists, setSuggestionLists] = useState([]);
+
   useEffect(() => {
     if (searchText) {
       setIsFocus(true);
     }
-  }, [searchText]);
 
+    // if (searchText && isSyllable(searchText) && !searchText.includes(' ')) {
+    //   fetch(
+    //     `http://138.2.112.49:3000/shops?search=${searchText}&offset=0&limit=100&sort=likes`
+    //   )
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       // console.log('통신 :', data.list);
+    //       setSuggestionLists(data.list);
+    //     });
+    // }
+
+    if (isSyllable()) {
+      setSearchTexts(searchText.split(' ').filter(s => s !== ''));
+    }
+  }, [searchText]);
+  // console.log('searchTexts :', searchTexts);
+
+  const isSyllable = (text = searchText) => {
+    const unicode = `${text[text.length - 1]}`.charCodeAt();
+    if ((12593 <= unicode && unicode <= 12643) || unicode === 32) return false;
+    return true;
+  };
+
+  useEffect(() => {
+    console.log('통신');
+    fetch(
+      `http://138.2.112.49:3000/shops?search=${searchTexts[0]}&offset=0&limit=100&sort=likes`
+    )
+      .then(res => res.json())
+      .then(data => {
+        const filtered = data.list.filter(list => {
+          return searchTexts.every(cur =>
+            [...list.bread, list.shopAddress, list.shopName]
+              .join(' ')
+              .includes(cur)
+          );
+        });
+
+        setSuggestionLists(filtered);
+      });
+  }, [searchTexts]);
+
+  console.log('2. suggestionLists :', suggestionLists);
   return (
     <>
       <Search isFocus={isFocus} ref={modalRef}>
@@ -100,7 +159,13 @@ const SearchBar = () => {
         </Form>
         {isFocus && (
           <SearchModal>
-            {searchText === '' && (
+            {searchText ? (
+              <SuggestionLists
+                suggestionLists={suggestionLists}
+                setIsFocus={setIsFocus}
+                setSearchText={setSearchText}
+              />
+            ) : (
               <RecentList
                 recentSearch={recentSearch}
                 setRecentSearch={setRecentSearch}
