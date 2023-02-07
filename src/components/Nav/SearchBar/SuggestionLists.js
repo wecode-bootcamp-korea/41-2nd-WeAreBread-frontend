@@ -1,90 +1,110 @@
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { FaSearch } from 'react-icons/fa';
+import { ImLocation } from 'react-icons/im';
 import theme from '../../../styles/theme';
 
-const RecentList = ({
+const SuggestionLists = ({
   recentSearch,
   setRecentSearch,
   setSearchText,
   setIsFocus,
+  suggestionLists,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const handleRemove = time => {
-    setRecentSearch(recentSearch.filter(item => item.time !== time));
+    setRecentSearch(recentSearch.filter(list => list.time !== time));
   };
 
   const handleAllRemove = () => {
     setRecentSearch([]);
   };
 
-  const handleSearch = searchText => {
-    searchParams.set('search', searchText);
-    setSearchParams(searchParams);
-    navigate(`/productList?${searchParams.toString()}`);
+  const handleSearch = id => {
+    navigate(`/productDetail/${id}`);
     setIsFocus(false);
     setSearchText('');
   };
 
   return (
     <>
-      <RecentListHeader>
-        <RecentListTitle>최근 검색어</RecentListTitle>
-        <RecentListClear onClick={handleAllRemove}>모두 지우기</RecentListClear>
-      </RecentListHeader>
-      <RecentListBox>
-        {recentSearch &&
-          recentSearch.map(item => {
+      <SuggestionListsHeader>
+        <SuggestionListsTitle />
+        <SuggestionListsClear />
+      </SuggestionListsHeader>
+      <SuggestionListsBox>
+        {suggestionLists &&
+          suggestionLists.map(list => {
             return (
               <RecentQueryWrap
-                key={item.time}
-                onClick={() => handleSearch(item.content)}
+                key={list.shopId}
+                onClick={() => handleSearch(list.shopId)}
               >
-                <RecentQueryItem>
+                <RecentQueryList>
                   <VerticalFocus />
-                  <FaSearch />
+                  <WrapperFaSearch>
+                    <ImLocation size={15} />
+                  </WrapperFaSearch>
                   <RecentSearchQueryContent>
-                    <RecentSearchQuery>{item.content}</RecentSearchQuery>
+                    <RecentSearchQuery>
+                      <ShopName>{list.shopName}</ShopName>
+                      <ShopAddress>{list.shopAddress}</ShopAddress>
+                    </RecentSearchQuery>
                     <RecentSearchInfo>
-                      <RecentInfoTime>
-                        2.6
-                        <Wrapper
-                          onClick={e => {
-                            e.stopPropagation();
-                            handleRemove(item.time);
-                          }}
-                        >
-                          <RecentInfoRemoveImg src="images/close.png" />
-                        </Wrapper>
-                      </RecentInfoTime>
+                      <RecentInfoTime>{list.bread.join(',')}</RecentInfoTime>
                     </RecentSearchInfo>
                   </RecentSearchQueryContent>
-                </RecentQueryItem>
+                </RecentQueryList>
               </RecentQueryWrap>
             );
           })}
-      </RecentListBox>
+      </SuggestionListsBox>
     </>
   );
 };
 
-const RecentListHeader = styled.div`
+const WrapperFaSearch = styled.div`
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  padding-bottom: 0.5rem;
+`;
+
+const ShopName = styled.div`
+  text-align: left;
+  font-size: 0.9375rem;
+  letter-spacing: -0.0469rem;
+  line-height: 1.3125rem;
+  color: rgb(32, 32, 32);
+`;
+
+const ShopAddress = styled.div`
+  font-size: 0.8125rem;
+  line-height: 1.1875rem;
+  color: rgb(126, 126, 126);
+  overflow: hidden;
+  letter-spacing: -0.0406rem;
+  white-space: nowrap;
+  text-align: left;
+`;
+
+const SuggestionListsHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-lists: center;
   padding: 20px 20px 10px;
 `;
 
-const RecentListTitle = styled.span`
+const SuggestionListsTitle = styled.span`
   font-size: 0.9375rem;
   font-weight: 500;
   color: rgb(32, 32, 32);
 `;
 
-const RecentListClear = styled.button`
+const SuggestionListsClear = styled.button`
   font-size: 0.875rem;
   color: rgb(158, 158, 158);
   margin: 0;
@@ -93,14 +113,15 @@ const RecentListClear = styled.button`
   border: transparent;
 `;
 
-const RecentListBox = styled.div``;
+const SuggestionListsBox = styled.div``;
 
 const RecentQueryWrap = styled.div`
   height: 42px;
 `;
 
-const RecentQueryItem = styled.button`
+const RecentQueryList = styled.button`
   display: flex;
+  align-lists: center;
   align-items: center;
   gap: 14px;
   width: 100%;
@@ -123,25 +144,29 @@ const VerticalFocus = styled.div`
 const RecentSearchQueryContent = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-lists: center;
   width: 100%;
   text-align: left;
   font-size: 0.9375rem;
   color: rgb(32, 32, 32);
 `;
 
-const RecentSearchQuery = styled.div``;
+const RecentSearchQuery = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
 
 const RecentSearchInfo = styled.div`
   display: flex;
-  align-items: center;
+  align-lists: center;
   height: 41px;
   padding-top: 0px;
 `;
 
 const RecentInfoTime = styled.span`
   display: flex;
-  align-items: center;
+  align-lists: center;
   gap: 13px;
   font-size: 0.875rem;
   color: rgb(158, 158, 158);
@@ -150,7 +175,7 @@ const RecentInfoTime = styled.span`
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-lists: center;
   justify-content: center;
   height: 100%;
   width: 20px;
@@ -163,4 +188,4 @@ const RecentInfoRemoveImg = styled.img`
   height: 10px;
 `;
 
-export default RecentList;
+export default SuggestionLists;
