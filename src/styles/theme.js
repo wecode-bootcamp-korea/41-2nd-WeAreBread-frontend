@@ -24,6 +24,12 @@ const common = {
     justify-content: center;
     align-items: center;
   `,
+
+  flexSpaceBetween: `
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  `,
 };
 
 const base = {

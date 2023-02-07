@@ -22,6 +22,7 @@
     "tree.indentGuidesStroke": "#ff5683"
   },
   "editor.tokenColorCustomizations": {
-    "comments": "#00ffe1"
+    "comments": "",
+    "textMateRules": []
   }
 }
