@@ -12,7 +12,6 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const reviewList = useSelector(state => state.review);
   const { isLoaded, data } = reviewList;
-
   const params = useParams();
   const shopId = params.id;
 

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import CardWrapper from './components/CardWrapper';
 import styled from 'styled-components';
-// import bread1 from './../../assets/images/bread1.jpg';
-
+import CardWrapper from './components/CardWrapper';
 const Main = () => {
   const [data, setData] = useState([]);
 
@@ -50,6 +48,7 @@ const TitleSection = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
 const MainTitle = styled.h1`
   width: 380px;
   height: 50px;
