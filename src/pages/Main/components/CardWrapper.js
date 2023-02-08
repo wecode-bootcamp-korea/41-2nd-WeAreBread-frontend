@@ -6,13 +6,13 @@ import styled from 'styled-components';
 import CardItem from './CardItem';
 
 const CardWrapper = ({ card }) => {
-  const { title, content } = card;
+  const { name, content } = card;
 
   return (
     <Wrapper>
       <Header>
         <TitleSection>
-          <Title>#{title}</Title>
+          <Title>#{name}</Title>
           <CardLength>({content ? content.length : 0})</CardLength>
         </TitleSection>
         <DetailBtn>자세히 보기 {`>`}</DetailBtn>

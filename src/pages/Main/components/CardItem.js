@@ -4,39 +4,47 @@ import { BsHeartFill } from 'react-icons/bs';
 import styled from 'styled-components';
 
 const CardItem = ({ el }) => {
-  const { id, imgUrl, name, address, bread, review, score, like } = el;
+  const {
+    id,
+    review_image,
+    name,
+    address,
+    bread,
+    review,
+    average_rating,
+    likeCount,
+  } = el;
 
   return (
     <CardWrapper key={id}>
       <LinkToDetail to={'/productDetail/' + id}>
-        <Photo src={imgUrl} alt="사진" />
+        <Photo src={review_image} alt="사진" />
         <StoreInfoSection className="hovered">
           <InfoTitle>{name}</InfoTitle>
-          <StoreInfo>
-            <span>{address}</span>|<span>{bread}</span>
-          </StoreInfo>
+          <p>- {address}</p>
+          <p>- {bread[1] ? `${bread[0]}, ${bread[1]}` : bread[0]}</p>
           <StoreInfoLine />
-          <StoreReviewSection>"{review}"</StoreReviewSection>
+          <div>"{review}"</div>
           <StoreRating>
             <Star>
               <StarIcon />
             </Star>
-            <Rating>{score}</Rating>
+            <Rating>{average_rating}</Rating>
             <Heart>
               <HeartIcon />
             </Heart>
-            <Rating>{like}</Rating>
+            <Rating>{likeCount}</Rating>
           </StoreRating>
         </StoreInfoSection>
         <RatingSection className="notHovered">
           <Star>
             <StarIcon />
           </Star>
-          <Rating>{score}</Rating>
+          <Rating>{average_rating}</Rating>
           <Heart>
             <HeartIcon />
           </Heart>
-          <Rating>{like}</Rating>
+          <Rating>{likeCount}</Rating>
         </RatingSection>
       </LinkToDetail>
       <StoreName>{name}</StoreName>
@@ -72,7 +80,7 @@ const StoreName = styled.h2`
   margin-top: 20px;
   margin-left: 30px;
   text-align: left;
-  font-size: ${({ theme: { fontSizes } }) => fontSizes.xl};
+  font-size: 18px;
   font-weight: 700;
 `;
 
@@ -143,12 +151,8 @@ const StoreInfoSection = styled.div`
 `;
 
 const InfoTitle = styled.h3`
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 600;
-`;
-
-const StoreInfo = styled.div`
-  font-size: 18px;
 `;
 
 const StoreInfoLine = styled.hr`
@@ -159,5 +163,5 @@ const StoreInfoLine = styled.hr`
 const StoreRating = styled.div`
   margin-top: 20px;
 `;
-const StoreReviewSection = styled.div``;
+
 export default CardItem;

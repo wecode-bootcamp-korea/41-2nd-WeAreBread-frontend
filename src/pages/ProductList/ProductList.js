@@ -122,23 +122,23 @@ const ProductList = () => {
         <Styled.SortContents>
           <Styled.SortList>
             <Styled.Order
-              onClick={() => {
-                sort.likes;
-              }}
+            // onClick={() => {
+            //   sort.likes;
+            // }}
             >
               좋아요 많은순
             </Styled.Order>
             <Styled.Order
-              onClick={() => {
-                sort.reviews;
-              }}
+            // onClick={() => {
+            //   sort.reviews;
+            // }}
             >
               리뷰 많은순
             </Styled.Order>
             <Styled.Order
-              onClick={() => {
-                sort.rates;
-              }}
+            // onClick={() => {
+            //   sort.rates;
+            // }}
             >
               평점순
             </Styled.Order>

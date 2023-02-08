@@ -1,4 +1,8 @@
 const color = {
+  heart: '#ff4c4c',
+  backgournd: '#F0F0F0',
+  component: '#9EB2AE',
+  highlight: '#1E5858',
   ivory: '#F2D399',
   yellow: '#F2AF5C',
   brown: '#D9814E',

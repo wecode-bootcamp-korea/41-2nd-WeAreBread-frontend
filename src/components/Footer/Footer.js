@@ -15,7 +15,7 @@ const Footer = () => {
         </AgreementSection>
         <div>
           <CompanyName>(주)위아브레드</CompanyName> <Bar>|</Bar>
-          <span>대표이사 : 김 승</span> <Bar>|</Bar>
+          <span>대표이사 : 황선용</span> <Bar>|</Bar>
           <span>소재지 : 서울특별시 강남구 테헤란로 427 10층</span>
         </div>
         <AskSection>이메일 문의 : contack@wearebread.com</AskSection>

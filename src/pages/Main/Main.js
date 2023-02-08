@@ -2,14 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CardWrapper from './components/CardWrapper';
+import MoveToTopBtn from '../../components/MoveToTopBtn/MoveToTopBtn';
+
 const Main = () => {
   const [data, setData] = useState([]);
+  const [category, setCategory] = useState([]);
 
   useEffect(() => {
-    fetch('/data/cardList.json')
+    fetch('http://138.2.112.49:3000/bread')
       .then(res => res.json())
-      .then(res => setData(res));
+      .then(res => setCategory(res.breadLists));
   }, []);
+
+  useEffect(() => {
+    Array.from(category).forEach(el => {
+      fetch(`http://138.2.112.49:3000/shops/bread_id/${el.id}`)
+        .then(res => res.json())
+        .then(res =>
+          setData(prev => [...prev, { ...el, content: res.shopDataByBread }])
+        );
+    });
+  }, [category]);
 
   return (
     <MainContainer>
@@ -17,6 +30,7 @@ const Main = () => {
         <MainTitle>무엇을 먹을지 고민된다면?</MainTitle>
         <MoveToRandom to="/random">클릭😛</MoveToRandom>
       </TitleSection>
+      <MoveToTopBtn />
       <ImgBox src="/images/bread3.jpg" />
       {data.map(card => {
         return <CardWrapper key={card.id} card={card} />;
