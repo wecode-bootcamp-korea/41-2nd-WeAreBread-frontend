@@ -17,7 +17,7 @@ const RandomImg = () => {
   };
 
   return (
-    <div className="background">
+    <Background className="background">
       <RandomTitle>이거 어때?</RandomTitle>
       <Wrapper
         src={`/images/bread${currentImageNum}.jpg`}
@@ -25,11 +25,16 @@ const RandomImg = () => {
         onClick={stopRandomGame}
       />
       <ImgTitle>{imgTitle[currentImageNum]}</ImgTitle>
-    </div>
+    </Background>
   );
 };
 
 export default RandomImg;
+
+const Background = styled.div`
+  width: 100%;
+  ${({ theme }) => theme.common.flexCenterColumn}
+`;
 
 const Wrapper = styled.img`
   width: 1600px;
@@ -46,7 +51,6 @@ const RandomTitle = styled.h2`
 
 const ImgTitle = styled.p`
   margin-top: 30px;
-  text-align: center;
   font-size: 50px;
   font-weight: 700;
 `;
