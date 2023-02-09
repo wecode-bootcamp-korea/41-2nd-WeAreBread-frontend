@@ -11,14 +11,12 @@ import {
   updateReviewAsync,
 } from '../../../../../redux/modules/review';
 
-const ProductReviewModal = () => {
+const ProductReviewModal = ({ shopId }) => {
   const dispatch = useDispatch();
   const { selectedReview } = useSelector(state => state.review);
 
   const [score, setScore] = useState(1);
   const [content, setContent] = useState('');
-
-  const shopId = 1; // TO DO: 고정값이 아닌 shopId 값 동적 바인딩
 
   useEffect(() => {
     if (selectedReview) {

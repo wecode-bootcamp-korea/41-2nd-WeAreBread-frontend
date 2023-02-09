@@ -4,7 +4,7 @@ export const ProductReviewWrap = styled.div`
   width: 700px;
   padding: 20px;
   margin-bottom: 30px;
-  background-color: #9eb2ae;
+  background-color: #ffc16b;
   border-radius: 15px;
   box-shadow: 2px 3px 5px 0 gray;
 `;
@@ -29,7 +29,7 @@ export const ProductReviewTitle = styled.div`
     }
 
     button:hover {
-      background-color: #1e5858;
+      background-color: #a8d38b;
       color: #fff;
       transition: all 0.5s;
     }

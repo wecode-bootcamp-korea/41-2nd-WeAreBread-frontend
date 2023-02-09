@@ -7,9 +7,10 @@ export const ProductDescWrap = styled.div`
   width: 700px;
   margin-bottom: 30px;
   padding: 20px;
-  background-color: #fff;
+  background-color: #ffc16b;
   border-radius: 15px;
   box-shadow: 2px 3px 5px 0 gray;
+  color: #fff;
 
   p {
     font-size: ${props => props.theme.fontSizes.m};

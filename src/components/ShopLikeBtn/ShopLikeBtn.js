@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
 
-const ShopLikeBtn = ({ shopId }) => {
+const ShopLikeBtn = ({ shopId, likeCount }) => {
   const [isClicked, setIsClicked] = useState(false);
   const handleLikeBtn = () => {
     if (!isClicked) {
@@ -10,7 +10,7 @@ const ShopLikeBtn = ({ shopId }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
-          Authorization: localStorage.getItem('AccessToken'),
+          Authorization: localStorage.getItem('accessToken'),
         },
       })
         .then(res => res.json())
@@ -25,7 +25,7 @@ const ShopLikeBtn = ({ shopId }) => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
-          Authorization: localStorage.getItem('AccessToken'),
+          Authorization: localStorage.getItem('accessToken'),
         },
       })
         .then(res => res.json())
@@ -45,6 +45,7 @@ const ShopLikeBtn = ({ shopId }) => {
       ) : (
         <EmptyHeart onClick={handleLikeBtn} />
       )}
+      <ShopCount>{likeCount}</ShopCount>
     </div>
   );
 };
@@ -75,4 +76,10 @@ const FillHeart = styled(BsHeartFill)`
 const EmptyHeart = styled(BsHeart)`
   color: gray;
   cursor: pointer;
+`;
+
+const ShopCount = styled.span`
+  font-size: ${props => props.theme.fontSizes.m};
+  vertical-align: top;
+  margin-left: 5px;
 `;
