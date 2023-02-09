@@ -1,63 +1,78 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { TbCurrentLocation } from 'react-icons/tb';
 import { FaRegShareSquare } from 'react-icons/fa';
 import ProductMap from './ProductMap';
 import ProductItem from './ProductItem';
+import MoveToTopBtn from '../../components/MoveToTopBtn/MoveToTopBtn';
 import * as Styled from './ProductListStyles';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+
+const getShops = async (search, offset, sort = 'likes', limit = 5) => {
+  const res = await fetch(
+    `http://138.2.112.49:3000/shops?search=서울&offset=${offset}&limit=${limit}&sort=${sort}`
+  );
+  const data = await res.json();
+  return data;
+};
 
 const ProductList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('search');
-  const sort = searchParams.get('sort');
 
+  // shops
+  const [item, setItem] = useState([]);
   const [offset, setOffset] = useState(0);
-
-  const limit = 5;
-
-  useEffect(() => {
-    fetch(
-      `https://138.2.112.49:3000/shops?search=${search}&_offset=${offset}&_limit=${limit}&sort=${
-        sort || 'likes'
-      }`,
-      {
-        headers: {
-          Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc1MzQyNjIwfQ.pxyYTyRX1MU_EKvMC9a8KfWFxfSkiw-rzTt80-0j78Y',
-        },
-      }
-    )
-      .then(response => response.json())
-      .then(result => setPins(result));
-  }, [search, offset, sort]);
-
-  const [pins, setPins] = useState([]);
-  const [scroll, setScroll] = useState(1);
-
-  const fetchPins = async scroll => {
-    const res = await fetch(
-      `https://138.2.112.49:3000/shops?search=${search}&_offset=${offset}&_limit=${limit}&sort=${
-        sort || 'likes'
-      }?scroll=${scroll}`
-    );
-    const data = await res.json();
-
-    setPins(prev => [...prev, ...data]);
-  };
-
-  useEffect(() => {
-    fetchPins(scroll);
-  }, [scroll]);
-
-  const loadMore = () => {
-    setScroll(prev => prev + 1);
-  };
-
+  const [sort, setSort] = useState('likes');
+  const [hasMoreLoad, setHasMoreLoad] = useState(true);
   const pageEnd = useRef(null);
 
+  // map
+  const currentUrl = window.location.href;
+  const [mapCenter, setMapCenter] = useState({ lat: 0, lng: 0 });
+  const [currentLocation, setCurrentLocation] = useState();
+  const [isCurrentLocationLoading, setIsCurrentLocationLoading] =
+    useState(false);
+
+  const [error, setError] = useState();
+
+  const loadMore = () => {
+    if (hasMoreLoad) {
+      setOffset(prev => prev + 5);
+    }
+  };
+
+  // type sortType = 'likes' | 'reviews' | 'rates'
+  const changeFilter = async sortType => {
+    setItem([]);
+    setOffset(0); // -> offset 도 0으로 해줘야함
+    setSort(sortType);
+  };
+
   useEffect(() => {
-    if (pageEnd.current) {
+    const loadData = async () => {
+      const res = await getShops(search, offset, sort);
+      // 아무것도 응답받지 못한 경우 더 이상 가져올 데이터가 없는 것으로 간주합니다.
+      if (res?.list?.length === 0) {
+        setHasMoreLoad(false);
+      } else {
+        // 처음 데이터 받아온 경우에는 응답 데이터의 첫번째 shop을 지도 중심점으로 이동합니다.
+        if (item.length === 0) {
+          const firstShop = res.list[0];
+          const { latitude, longitude } = firstShop;
+          setMapCenter({
+            lat: latitude,
+            lng: longitude,
+          });
+        }
+        setItem(prev => [...prev, ...res.list]);
+      }
+    };
+    loadData();
+  }, [search, offset, sort]);
+
+  useEffect(() => {
+    if (pageEnd?.current) {
       const observer = new IntersectionObserver(
         entries => {
           if (entries[0].isIntersecting) {
@@ -72,27 +87,16 @@ const ProductList = () => {
 
   /////////////////////////////////////////////
 
-  const currentUrl = window.location.href;
-
-  const [mapCenter, setMapCenter] = useState({
-    lat: 33.452613,
-    lng: 126.570888,
-  });
-  const [currentLocation, setCurrentLocation] = useState();
-  const [isCurrentLocationLoading, setIsCurrentLocationLoading] =
-    useState(false);
-
-  const [error, setError] = useState();
   const handleSuccess = pos => {
     const { latitude, longitude } = pos.coords;
 
     setCurrentLocation({
-      lat: latitude,
-      lng: longitude,
+      lat: { latitude },
+      lng: { longitude },
     });
     setMapCenter({
-      lat: latitude,
-      lng: longitude,
+      lat: { latitude },
+      lng: { longitude },
     });
     setIsCurrentLocationLoading(false);
   };
@@ -121,25 +125,13 @@ const ProductList = () => {
       <Styled.Body>
         <Styled.SortContents>
           <Styled.SortList>
-            <Styled.Order
-            // onClick={() => {
-            //   sort.likes;
-            // }}
-            >
+            <Styled.Order onClick={() => changeFilter('likes')}>
               좋아요 많은순
             </Styled.Order>
-            <Styled.Order
-            // onClick={() => {
-            //   sort.reviews;
-            // }}
-            >
+            <Styled.Order onClick={() => changeFilter('reviews')}>
               리뷰 많은순
             </Styled.Order>
-            <Styled.Order
-            // onClick={() => {
-            //   sort.rates;
-            // }}
-            >
+            <Styled.Order onClick={() => changeFilter('rates')}>
               평점순
             </Styled.Order>
           </Styled.SortList>
@@ -160,10 +152,10 @@ const ProductList = () => {
         </Styled.SortContents>
         <Styled.MapHeader>
           <Styled.MapTitle>
-            <Styled.SubTitle>{search}</Styled.SubTitle>
+            <Styled.SubTitle>서울</Styled.SubTitle>
             <Styled.SubInfo>
               맛집(
-              <Styled.PlaceCount>{(10000).toLocaleString()}+</Styled.PlaceCount>
+              <Styled.PlaceCount>{item.length}+</Styled.PlaceCount>
               곳)
             </Styled.SubInfo>
           </Styled.MapTitle>
@@ -181,10 +173,13 @@ const ProductList = () => {
           currentLocation={currentLocation}
           geoLocationError={error}
         />
-        {pins.map(store => {
-          return <ProductItem key={store.shopId} store={store} />;
-        })}
+        {item &&
+          item.map(store => {
+            return <ProductItem key={store.shopId} store={store} />;
+          })}
       </Styled.Body>
+      <div ref={pageEnd} />
+      <MoveToTopBtn />
     </Styled.Background>
   );
 };

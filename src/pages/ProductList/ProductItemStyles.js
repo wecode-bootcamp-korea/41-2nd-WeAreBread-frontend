@@ -70,7 +70,7 @@ export const Category = styled.div``;
 export const Tag = styled.div``;
 
 export const Rating = styled.div`
-  ${({ theme }) => theme.common.flexCenter};
+  display: flex;
 `;
 
 export const UserScore = styled.div``;

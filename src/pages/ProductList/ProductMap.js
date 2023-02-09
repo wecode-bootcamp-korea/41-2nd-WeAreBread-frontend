@@ -251,11 +251,16 @@ const TooltipMarker = ({ position, tooltipText }) => {
 };
 
 /*global kakao*/
-const ProductMap = ({ mapCenter, currentLocation, geoLocationError }) => {
-  const data = [
-    { position: { lat: 33.450707, lng: 126.570678 }, name: '바게트' },
-    { position: { lat: 37.402054, lng: 127.108209 }, name: '프레첼' },
-    { position: { lat: 37.402827, lng: 127.107292 }, name: '소금빵' },
+const ProductMap = ({
+  mapCenter,
+  currentLocation,
+  geoLocationError,
+  latitude,
+  longitude,
+  bread,
+}) => {
+  const item = [
+    { position: { lat: latitude, lng: longitude }, name: { bread } },
   ];
 
   return (
@@ -277,7 +282,7 @@ const ProductMap = ({ mapCenter, currentLocation, geoLocationError }) => {
         ) : (
           <></>
         )}
-        {data.map(markerData => (
+        {item.map(markerData => (
           <TooltipMarker
             key={`TooltipMarker-${markerData.name}`}
             position={markerData.position}
