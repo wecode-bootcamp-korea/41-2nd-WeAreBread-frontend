@@ -7,6 +7,7 @@ import {
   deleteReviewAsync,
   selectReview,
 } from '../../../../../../redux/modules/review';
+import ReviewLikeBtn from '../../../../../../components/ReviewLikeBtn/ReviewLikeBtn';
 
 const ProductReviewItem = ({ review }) => {
   const dispatch = useDispatch();
@@ -41,10 +42,16 @@ const ProductReviewItem = ({ review }) => {
         </RI.ReviewDesc>
         <span>{review.reviewContent}</span>
       </RI.ProductReviewText>
-      <RI.Btn>
-        <button onClick={handleEdit}>수정</button>
-        <button onClick={e => handleDeleteReview(review)}>삭제</button>
-      </RI.Btn>
+      <RI.BtnWrap>
+        <ReviewLikeBtn
+          reviewId={review.reviewId}
+          recommendCount={review.recommendCount}
+        />
+        <RI.Btn>
+          <button onClick={handleEdit}>수정</button>
+          <button onClick={e => handleDeleteReview(review)}>삭제</button>
+        </RI.Btn>
+      </RI.BtnWrap>
     </RI.ProductReviewItemWrap>
   );
 };

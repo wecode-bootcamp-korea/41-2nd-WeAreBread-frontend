@@ -16,13 +16,5 @@
   "files.autoSave": "onFocusChange",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "workbench.tree.indent": 20,
-  "workbench.colorCustomizations": {
-    "tree.indentGuidesStroke": "#ff5683"
-  },
-  "editor.tokenColorCustomizations": {
-    "comments": "",
-    "textMateRules": []
   }
 }

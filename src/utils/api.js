@@ -1,6 +1,4 @@
 const BASE_URL = 'http://138.2.112.49:3000';
-const TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc1MzQyNjIwfQ.pxyYTyRX1MU_EKvMC9a8KfWFxfSkiw-rzTt80-0j78Y';
 
 /**
  *
@@ -15,7 +13,7 @@ export const fetchInstance = async (url = '', method, data = {}) => {
     method: method,
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      Authorization: TOKEN,
+      Authorization: localStorage.getItem('accessToken'),
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',

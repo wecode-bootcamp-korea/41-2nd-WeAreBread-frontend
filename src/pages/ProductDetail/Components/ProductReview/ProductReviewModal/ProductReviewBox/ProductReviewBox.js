@@ -3,7 +3,7 @@ import * as RB from './ProductReviewBoxStyle';
 
 const ProductReviewBox = ({ onChange, onSubmit, content }) => {
   const handleKeyDown = e => {
-    if (e.keyCode === 13) {
+    if (e.key === 'Enter') {
       onSubmit();
     }
   };
