@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaStar } from 'react-icons/fa';
-import { FiHeart } from 'react-icons/fi';
+import { AiFillStar } from 'react-icons/ai';
+import { BsHeartFill } from 'react-icons/bs';
 import * as Styled from './ProductItemStyles';
 
 const ProductItem = ({ store }) => {
@@ -12,11 +12,9 @@ const ProductItem = ({ store }) => {
     reviewCount,
     shopAverageRating,
     likeCount,
-    reviewByUser,
+    reviewByNickname,
     review_image,
   } = store;
-
-  console.log(bread);
 
   return (
     <Styled.ItemContainer>
@@ -32,13 +30,13 @@ const ProductItem = ({ store }) => {
             <Styled.Rating>
               <Styled.UserScore>
                 <Styled.StarIcon>
-                  <FaStar className="star" />
+                  <AiFillStar className="star" />
                 </Styled.StarIcon>
                 {shopAverageRating} ({reviewCount})
               </Styled.UserScore>
               <Styled.Slash>|</Styled.Slash>
               <Styled.HeartIcon>
-                <FiHeart className="heart" />
+                <BsHeartFill className="heart" />
               </Styled.HeartIcon>
               {likeCount}
             </Styled.Rating>
@@ -51,7 +49,7 @@ const ProductItem = ({ store }) => {
               <Styled.LikedNum>{likeCount}</Styled.LikedNum>명이 추천했습니다.
             </Styled.WhoLiked>
             <Styled.Reviewer>
-              by.{reviewByUser ? reviewByUser[0] : '없음'}
+              by.{reviewByNickname ? reviewByNickname[0] : '없음'}
             </Styled.Reviewer>
           </Styled.ReviewInfo>
         </Styled.ReviewContainer>

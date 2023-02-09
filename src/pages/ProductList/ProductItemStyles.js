@@ -71,31 +71,42 @@ export const Tag = styled.div``;
 
 export const Rating = styled.div`
   display: flex;
+  align-items: center;
 `;
 
-export const UserScore = styled.div``;
+export const UserScore = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export const StarIcon = styled.span`
   path {
     color: #ffa300;
   }
-  margin-right: 3px;
+  display: flex;
+  align-items: center;
+  margin-top: 3px;
+  margin-right: 2px;
   .star {
-    --size: 15px;
+    --size: 25px;
     width: var(--size);
     height: var(--size);
   }
 `;
 export const Slash = styled.div`
-  --size: 3px;
+  --size: 10px;
   margin-left: var(--size);
   margin-right: var(--size);
 `;
 
 export const HeartIcon = styled.div`
-  ${({ theme }) => theme.common.flexCenter};
-  margin-right: 3px;
-  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  margin-right: 5px;
+  path {
+    color: #ff4c4c;
+  }
   .heart {
   }
 `;

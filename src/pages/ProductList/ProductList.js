@@ -10,7 +10,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const getShops = async (search, offset, sort = 'likes', limit = 5) => {
   const res = await fetch(
-    `http://138.2.112.49:3000/shops?search=서울&offset=${offset}&limit=${limit}&sort=${sort}`
+    `http://138.2.112.49:3000/shops?search=${search}&offset=${offset}&limit=${limit}&sort=${sort}`
   );
   const data = await res.json();
   return data;
@@ -20,14 +20,12 @@ const ProductList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('search');
 
-  // shops
   const [item, setItem] = useState([]);
   const [offset, setOffset] = useState(0);
   const [sort, setSort] = useState('likes');
   const [hasMoreLoad, setHasMoreLoad] = useState(true);
   const pageEnd = useRef(null);
 
-  // map
   const currentUrl = window.location.href;
   const [mapCenter, setMapCenter] = useState({ lat: 0, lng: 0 });
   const [currentLocation, setCurrentLocation] = useState();
@@ -42,21 +40,18 @@ const ProductList = () => {
     }
   };
 
-  // type sortType = 'likes' | 'reviews' | 'rates'
   const changeFilter = async sortType => {
     setItem([]);
-    setOffset(0); // -> offset 도 0으로 해줘야함
+    setOffset(0);
     setSort(sortType);
   };
 
   useEffect(() => {
     const loadData = async () => {
       const res = await getShops(search, offset, sort);
-      // 아무것도 응답받지 못한 경우 더 이상 가져올 데이터가 없는 것으로 간주합니다.
       if (res?.list?.length === 0) {
         setHasMoreLoad(false);
       } else {
-        // 처음 데이터 받아온 경우에는 응답 데이터의 첫번째 shop을 지도 중심점으로 이동합니다.
         if (item.length === 0) {
           const firstShop = res.list[0];
           const { latitude, longitude } = firstShop;
@@ -70,8 +65,6 @@ const ProductList = () => {
     };
     loadData();
   }, [search, offset, sort]);
-
-  console.log(mapCenter);
 
   useEffect(() => {
     if (pageEnd?.current) {
@@ -87,18 +80,15 @@ const ProductList = () => {
     }
   }, [pageEnd]);
 
-  /////////////////////////////////////////////
-
   const handleSuccess = pos => {
     const { latitude, longitude } = pos.coords;
-
     setCurrentLocation({
       lat: { latitude },
       lng: { longitude },
     });
     setMapCenter({
-      lat: { latitude },
-      lng: { longitude },
+      lat: latitude,
+      lng: longitude,
     });
     setIsCurrentLocationLoading(false);
   };
@@ -146,7 +136,7 @@ const ProductList = () => {
                 isCurrentLocationLoading
                   ? '불러오는중'
                   : currentLocation
-                  ? `위도 : ${currentLocation.lat}, 경도: ${currentLocation.lng}`
+                  ? `위도 : ${currentLocation.lat.latitude}, 경도: ${currentLocation.lng.longitude}`
                   : '위치 없음'
               }`}</Styled.CurrentName>
             </Styled.HoverButton>

@@ -9,9 +9,6 @@ import * as ReactDOM from 'react-dom';
 import { useMap, Map, MapMarker, AbstractOverlay } from 'react-kakao-maps-sdk';
 import styled from 'styled-components';
 
-// TODO : 통신
-// TODO : 필터 기능?
-
 const TooltipMarker = ({ position, tooltipText }) => {
   const map = useMap();
   const node = useRef(document.createElement('div'));
@@ -251,17 +248,7 @@ const TooltipMarker = ({ position, tooltipText }) => {
 };
 
 /*global kakao*/
-const ProductMap = ({
-  mapCenter,
-  currentLocation,
-  geoLocationError,
-  latitude,
-  longitude,
-  bread,
-  item,
-}) => {
-  console.log(item);
-
+const ProductMap = ({ mapCenter, currentLocation, geoLocationError, item }) => {
   return (
     <S.Wrapper>
       {mapCenter.lat !== 0 && (
