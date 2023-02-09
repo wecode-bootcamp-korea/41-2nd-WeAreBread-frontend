@@ -44,7 +44,7 @@ export default Main;
 const MainContainer = styled.div`
   ${({ theme }) => theme.common.flexCenterColumn}
   width: 100%;
-  padding-top: 60px;
+  padding-top: 80px;
   min-height: calc(100vh - 206px);
   background-color: #f0f0f0;
 `;
@@ -75,7 +75,7 @@ const MainTitle = styled.h1`
   font-size: 30px;
   font-weight: 700;
   box-shadow: 8px 5px 5px rgb(0, 0, 0, 0.3);
-  -webkit-text-stroke: 1px #1e5858;
+  -webkit-text-stroke: 1px #004aad;
 `;
 
 const MoveToRandom = styled(Link)`
@@ -83,7 +83,7 @@ const MoveToRandom = styled(Link)`
   width: 100px;
   height: 50px;
   margin-top: 20px;
-  background-color: #1e5858;
+  background-color: #fb9927;
   color: white;
   font-size: 25px;
   border-radius: 15px;
