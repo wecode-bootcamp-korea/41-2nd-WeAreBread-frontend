@@ -16,6 +16,8 @@ const ProductItem = ({ store }) => {
     review_image,
   } = store;
 
+  console.log(bread);
+
   return (
     <Styled.ItemContainer>
       <Styled.BreadContainer to="/productDetail">

@@ -109,11 +109,6 @@ export const SubInfo = styled.div`
   display: flex;
 `;
 
-export const PlaceCount = styled.div`
-  color: ${({ theme }) => theme.color.redBrown};
-  font-weight: bold;
-`;
-
 export const ShareIcon = styled.button`
   border: none;
   background-color: white;

@@ -258,38 +258,39 @@ const ProductMap = ({
   latitude,
   longitude,
   bread,
+  item,
 }) => {
-  const item = [
-    { position: { lat: latitude, lng: longitude }, name: { bread } },
-  ];
+  console.log(item);
 
   return (
     <S.Wrapper>
-      <Map
-        center={mapCenter}
-        isPanto={true}
-        style={{
-          border: 'none',
-          borderRadius: '14px',
-          marginLeft: '35px',
-          width: '1000px',
-          height: '450px',
-        }}
-        level={5}
-      >
-        {!geoLocationError && currentLocation ? (
-          <MapMarker position={currentLocation} />
-        ) : (
-          <></>
-        )}
-        {item.map(markerData => (
-          <TooltipMarker
-            key={`TooltipMarker-${markerData.name}`}
-            position={markerData.position}
-            tooltipText={markerData.name}
-          />
-        ))}
-      </Map>
+      {mapCenter.lat !== 0 && (
+        <Map
+          center={mapCenter}
+          isPanto={true}
+          style={{
+            border: 'none',
+            borderRadius: '14px',
+            marginLeft: '35px',
+            width: '1000px',
+            height: '450px',
+          }}
+          level={5}
+        >
+          {!geoLocationError && currentLocation ? (
+            <MapMarker position={currentLocation} />
+          ) : (
+            <></>
+          )}
+          {item.map(markerData => (
+            <TooltipMarker
+              key={`TooltipMarker-${markerData.shopName}`}
+              position={{ lat: markerData.lat, lng: markerData.lng }}
+              tooltipText={markerData.name}
+            />
+          ))}
+        </Map>
+      )}
     </S.Wrapper>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { TbCurrentLocation } from 'react-icons/tb';
 import { FaRegShareSquare } from 'react-icons/fa';
@@ -61,8 +61,8 @@ const ProductList = () => {
           const firstShop = res.list[0];
           const { latitude, longitude } = firstShop;
           setMapCenter({
-            lat: latitude,
-            lng: longitude,
+            lat: Number(longitude),
+            lng: Number(latitude),
           });
         }
         setItem(prev => [...prev, ...res.list]);
@@ -70,6 +70,8 @@ const ProductList = () => {
     };
     loadData();
   }, [search, offset, sort]);
+
+  console.log(mapCenter);
 
   useEffect(() => {
     if (pageEnd?.current) {
@@ -152,12 +154,8 @@ const ProductList = () => {
         </Styled.SortContents>
         <Styled.MapHeader>
           <Styled.MapTitle>
-            <Styled.SubTitle>서울</Styled.SubTitle>
-            <Styled.SubInfo>
-              맛집(
-              <Styled.PlaceCount>{item.length}+</Styled.PlaceCount>
-              곳)
-            </Styled.SubInfo>
+            <Styled.SubTitle>서울 </Styled.SubTitle>
+            <Styled.SubInfo />
           </Styled.MapTitle>
           <Styled.ShareIcon>
             <CopyToClipboard
@@ -169,6 +167,7 @@ const ProductList = () => {
           </Styled.ShareIcon>
         </Styled.MapHeader>
         <ProductMap
+          item={item}
           mapCenter={mapCenter}
           currentLocation={currentLocation}
           geoLocationError={error}
