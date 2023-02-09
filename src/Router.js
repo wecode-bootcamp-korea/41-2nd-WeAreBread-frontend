@@ -6,6 +6,8 @@ import ProductDetail from './pages/ProductDetail/ProductDetail';
 import ProductList from './pages/ProductList/ProductList';
 import Footer from './components/Footer/Footer';
 import RandomImg from './pages/RandomImg/RandomImg';
+import KakaoRequest from './socialLogin/KakaoRequest';
+import KakaoReqLogout from './socialLogin/KaKaoReqLogout';
 
 const NavFooterWrapper = () => {
   return (
@@ -20,6 +22,8 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/oauth/kakao" element={<KakaoRequest />} />
+        <Route path="/oauth/kakao/logout" element={<KakaoReqLogout />} />
         <Route path="/random" element={<RandomImg />} />
         <Route element={<NavFooterWrapper />}>
           <Route path="/" element={<Main />} />
