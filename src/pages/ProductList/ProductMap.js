@@ -262,12 +262,12 @@ const ProductMap = ({ mapCenter, currentLocation, geoLocationError, item }) => {
             width: '1000px',
             height: '450px',
           }}
-          level={5}
+          level={6}
         >
           {!geoLocationError && currentLocation ? (
             <MapMarker position={currentLocation} />
           ) : (
-            <></>
+            ''
           )}
           {item.map(markerData => (
             <TooltipMarker
@@ -299,7 +299,7 @@ const S = {
       border: 2px solid #333;
       font-size: 25px;
       font-weight: bold;
-      padding-left: 1px;
+      padding: 5px;
       left: 65px;
       top: 14px;
       border-radius: 5px;
