@@ -15,11 +15,11 @@ export const BreadContainer = styled(Link)`
   border: none;
   border-radius: 14px;
   padding: 0;
-  background-color: #9eb2ae;
+  background-color: #fcb44d;
   transition: all ease 1s;
 
   &:hover {
-    background-color: #1e5858;
+    background-color: #f98824;
     transform: scale(1.03, 1.03);
   }
 `;
@@ -81,7 +81,7 @@ export const UserScore = styled.div`
 
 export const StarIcon = styled.span`
   path {
-    color: #ffa300;
+    color: yellow;
   }
   display: flex;
   align-items: center;

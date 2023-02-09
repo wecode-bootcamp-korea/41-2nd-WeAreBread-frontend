@@ -39,7 +39,7 @@ export const Order = styled.button`
   border-radius: 6px;
   width: auto;
   height: 40px;
-  background-color: #9eb2ae;
+  background-color: #fca62f;
   color: white;
   margin-left: 20px;
   --size: 15px;
@@ -48,10 +48,10 @@ export const Order = styled.button`
   transition: all ease 1s;
 
   &:hover {
-    background-color: #1e5858;
+    background-color: #f98824;
   }
   &:focus {
-    background-color: #1e5858;
+    background-color: #f98824;
   }
 `;
 

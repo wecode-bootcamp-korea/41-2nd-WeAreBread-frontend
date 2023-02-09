@@ -56,8 +56,8 @@ const ProductList = () => {
           const firstShop = res.list[0];
           const { latitude, longitude } = firstShop;
           setMapCenter({
-            lat: Number(longitude),
-            lng: Number(latitude),
+            lat: Number(latitude),
+            lng: Number(longitude),
           });
         }
         setItem(prev => [...prev, ...res.list]);
