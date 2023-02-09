@@ -5,7 +5,7 @@ export const ProductScoreWrap = styled.div`
   display: flex;
 
   .starBox {
-    z-index: 1000;
+    z-index: 100;
     margin-right: 10px;
     height: 19px;
     overflow: hidden;
@@ -21,7 +21,6 @@ export const ProductScoreWrap = styled.div`
   .backgroundStar {
     width: 100px;
     height: 19px;
-    margin-bottom: 100px;
   }
 
   span {

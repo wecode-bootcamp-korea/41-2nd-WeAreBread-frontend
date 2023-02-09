@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
 
-const ReviewLikeBtn = ({ reviewId }) => {
+const ReviewLikeBtn = ({ reviewId, recommendCount }) => {
   const [isClicked, setIsClicked] = useState(false);
   const handleLikeBtn = () => {
     if (!isClicked) {
@@ -12,7 +12,7 @@ const ReviewLikeBtn = ({ reviewId }) => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
-            Authorization: localStorage.getItem('AccessToken'),
+            Authorization: localStorage.getItem('accessToken'),
           },
         }
       )
@@ -30,7 +30,7 @@ const ReviewLikeBtn = ({ reviewId }) => {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
-            Authorization: localStorage.getItem('AccessToken'),
+            Authorization: localStorage.getItem('accessToken'),
           },
         }
       )
@@ -51,6 +51,7 @@ const ReviewLikeBtn = ({ reviewId }) => {
       ) : (
         <EmptyHeart onClick={handleLikeBtn} />
       )}
+      <ReviewCount>{recommendCount}</ReviewCount>
     </div>
   );
 };
@@ -81,4 +82,10 @@ const FillHeart = styled(BsHeartFill)`
 const EmptyHeart = styled(BsHeart)`
   color: gray;
   cursor: pointer;
+`;
+
+const ReviewCount = styled.span`
+  font-size: ${props => props.theme.fontSizes.m};
+  vertical-align: top;
+  margin-left: 5px;
 `;

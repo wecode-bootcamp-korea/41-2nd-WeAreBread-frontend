@@ -23,7 +23,7 @@ const ProductReview = ({ reviewList, shopId }) => {
           </button>
         </div>
       </R.ProductReviewTitle>
-      {modal && <ProductReviewModal />}
+      {modal && <ProductReviewModal shopId={shopId} />}
       {reviewList.length ? (
         <ProductReviewList reviewList={reviewList} />
       ) : (

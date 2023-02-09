@@ -12,6 +12,7 @@ export const ProductReviewContentWrap = styled.div`
   width: 100%;
   height: 100%;
   background-color: #00000050;
+  z-index: 999;
 `;
 
 export const ProductReviewContent = styled.div`
