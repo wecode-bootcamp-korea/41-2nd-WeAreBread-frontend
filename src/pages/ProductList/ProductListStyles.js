@@ -1,10 +1,10 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 
 export const Background = styled.div`
   background-color: #f0f0f0;
   ${({ theme }) => theme.common.flexCenterColumn};
   min-height: calc(100vh - 206px);
-  padding-top: 500px;
+  padding-top: 100px;
 `;
 
 export const Body = styled.div`

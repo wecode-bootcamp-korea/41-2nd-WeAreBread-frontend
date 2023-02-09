@@ -5,6 +5,7 @@ import * as Styled from './ProductItemStyles';
 
 const ProductItem = ({ store }) => {
   const {
+    shopId,
     shopName,
     shopAddress,
     bread,
@@ -16,11 +17,9 @@ const ProductItem = ({ store }) => {
     review_image,
   } = store;
 
-  console.log(store);
-
   return (
     <Styled.ItemContainer>
-      <Styled.BreadContainer to="/productDetail">
+      <Styled.BreadContainer to={'/productDetail/' + shopId}>
         <Styled.BreadContents>
           <Styled.BreadImg src={review_image} />
           <Styled.BreadInfo>

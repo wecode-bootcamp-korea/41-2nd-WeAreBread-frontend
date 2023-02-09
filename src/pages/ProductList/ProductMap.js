@@ -271,9 +271,9 @@ const ProductMap = ({ mapCenter, currentLocation, geoLocationError, item }) => {
           )}
           {item.map(markerData => (
             <TooltipMarker
-              key={`TooltipMarker-${markerData.shopName}`}
-              position={{ lat: markerData.lat, lng: markerData.lng }}
-              tooltipText={markerData.name}
+              key={`TooltipMarker-${markerData.shopId}`}
+              position={{ lat: markerData.latitude, lng: markerData.longitude }}
+              tooltipText={markerData.shopName}
             />
           ))}
         </Map>
@@ -281,7 +281,6 @@ const ProductMap = ({ mapCenter, currentLocation, geoLocationError, item }) => {
     </S.Wrapper>
   );
 };
-
 export default ProductMap;
 
 const S = {

@@ -65,7 +65,6 @@ const ProductList = () => {
     };
     loadData();
   }, [search, offset, sort]);
-
   useEffect(() => {
     if (pageEnd?.current) {
       const observer = new IntersectionObserver(
@@ -83,8 +82,8 @@ const ProductList = () => {
   const handleSuccess = pos => {
     const { latitude, longitude } = pos.coords;
     setCurrentLocation({
-      lat: { latitude },
-      lng: { longitude },
+      lat: latitude,
+      lng: longitude,
     });
     setMapCenter({
       lat: latitude,
@@ -136,7 +135,7 @@ const ProductList = () => {
                 isCurrentLocationLoading
                   ? '불러오는중'
                   : currentLocation
-                  ? `위도 : ${currentLocation.lat.latitude}, 경도: ${currentLocation.lng.longitude}`
+                  ? `위도 : ${currentLocation.lat}, 경도: ${currentLocation.lng}`
                   : '위치 없음'
               }`}</Styled.CurrentName>
             </Styled.HoverButton>
