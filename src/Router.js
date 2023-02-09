@@ -27,7 +27,7 @@ const Router = () => {
         <Route path="/random" element={<RandomImg />} />
         <Route element={<NavFooterWrapper />}>
           <Route path="/" element={<Main />} />
-          <Route path="/productDetail" element={<ProductDetail />} />
+          <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/productList" element={<ProductList />} />
         </Route>
       </Routes>

@@ -46,13 +46,11 @@ const StyledSlider = styled(Slider)`
     position: absolute;
     top: -10px;
     right: 10px;
-    color: #9eb2ae;
   }
   .slick-next::before {
     position: absolute;
     top: -10px;
     left: 10px;
-    color: #9eb2ae;
   }
   .slick-slide div {
     display: flex;
@@ -63,7 +61,7 @@ const Wrapper = styled.div`
   width: 1070px;
   margin-top: 40px;
   padding-top: 26px;
-  background-color: #9eb2ae;
+  background-color: #fca62f;
   border-radius: 15px;
   box-shadow: 2px 3px 5px 0px gray;
   &:last-child {
@@ -90,7 +88,7 @@ const Title = styled.h1`
 const CardLength = styled.span`
   margin-left: 5px;
   padding-top: 3px;
-  color: lightgray;
+  color: white;
   font-size: ${({ theme: { fontSizes } }) => fontSizes.xl};
 `;
 
@@ -105,7 +103,7 @@ const DetailBtn = styled.button`
   border-radius: 18px;
 
   &:hover {
-    background-color: #1e5858;
+    background-color: #fbdba8;
     color: white;
   }
 `;

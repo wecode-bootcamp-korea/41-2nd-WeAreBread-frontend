@@ -222,7 +222,7 @@ const IconButton = styled.button`
   width: 40px;
   height: 38px;
   padding: 10px;
-  background-color: ${({ theme }) => theme.color.ivory};
+  background-color: #fcb44d;
   color: ${({ theme }) => theme.white};
   border: none;
   border-radius: 100%;
