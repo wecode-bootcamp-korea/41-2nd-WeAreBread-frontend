@@ -17,15 +17,17 @@ const RandomImg = () => {
   };
 
   return (
-    <Background className="background">
+    <>
       <RandomTitle>이거 어때?</RandomTitle>
-      <Wrapper
-        src={`/images/bread${currentImageNum}.jpg`}
-        alt="빵 랜덤 이미지"
-        onClick={stopRandomGame}
-      />
-      <ImgTitle>{imgTitle[currentImageNum]}</ImgTitle>
-    </Background>
+      <Background className="background">
+        <Wrapper
+          src={`/images/bread${currentImageNum}.jpg`}
+          alt="빵 랜덤 이미지"
+          onClick={stopRandomGame}
+        />
+        <ImgTitle>{imgTitle[currentImageNum]}</ImgTitle>
+      </Background>
+    </>
   );
 };
 
@@ -38,7 +40,7 @@ const Background = styled.div`
 
 const Wrapper = styled.img`
   width: 1600px;
-  height: 570px;
+  height: 720px;
   object-fit: cover;
   animation: fadeIn 0.5s;
 `;

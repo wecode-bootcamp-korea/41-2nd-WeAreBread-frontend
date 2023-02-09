@@ -25,22 +25,12 @@ const CardItem = ({ el }) => {
           <p>- {bread[1] ? `${bread[0]}, ${bread[1]}` : bread[0]}</p>
           <StoreInfoLine />
           <div>"{review}"</div>
-          <StoreRating>
-            <Star>
-              <StarIcon />
-            </Star>
-            <Rating>{average_rating}</Rating>
-            <Heart>
-              <HeartIcon />
-            </Heart>
-            <Rating>{likeCount}</Rating>
-          </StoreRating>
         </StoreInfoSection>
         <RatingSection className="notHovered">
           <Star>
             <StarIcon />
           </Star>
-          <Rating>{average_rating}</Rating>
+          <Rating>{average_rating ? average_rating : (5.0).toFixed(1)}</Rating>
           <Heart>
             <HeartIcon />
           </Heart>
@@ -141,7 +131,7 @@ const StoreInfoSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 240px;
-  height: 180px;
+  height: 200px;
   padding: 20px 20px 10px 20px;
   border-top-right-radius: 50px;
   border-bottom-left-radius: 15px;
@@ -158,10 +148,6 @@ const InfoTitle = styled.h3`
 const StoreInfoLine = styled.hr`
   width: 200px;
   margin: 8px 0;
-`;
-
-const StoreRating = styled.div`
-  margin-top: 20px;
 `;
 
 export default CardItem;

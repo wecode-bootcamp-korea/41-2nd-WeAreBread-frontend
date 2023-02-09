@@ -52,7 +52,9 @@ const Nav = () => {
     <Header>
       <Wrapper>
         <Link to="/">
-          <Logo>WeAreBread</Logo>
+          <Logo>
+            <img src="/images/logo.png" alt="로고 사진" />
+          </Logo>
         </Link>
         <SearchBar />
         {isLogin ? (
