@@ -1,10 +1,11 @@
 import React from 'react';
-import { FaStar } from 'react-icons/fa';
-import { FiHeart } from 'react-icons/fi';
+import { AiFillStar } from 'react-icons/ai';
+import { BsHeartFill } from 'react-icons/bs';
 import * as Styled from './ProductItemStyles';
 
 const ProductItem = ({ store }) => {
   const {
+    shopId,
     shopName,
     shopAddress,
     bread,
@@ -12,31 +13,31 @@ const ProductItem = ({ store }) => {
     reviewCount,
     shopAverageRating,
     likeCount,
-    reviewByUser,
+    reviewByNickname,
     review_image,
   } = store;
 
   return (
     <Styled.ItemContainer>
-      <Styled.BreadContainer to="/productDetail">
+      <Styled.BreadContainer to={'/productDetail/' + shopId}>
         <Styled.BreadContents>
           <Styled.BreadImg src={review_image} />
           <Styled.BreadInfo>
             <Styled.BreadTitle>{shopName}</Styled.BreadTitle>
             <Styled.MidInfo>
               <Styled.Category>{shopAddress}</Styled.Category>
-              <Styled.Tag>#{bread[1]}</Styled.Tag>
+              <Styled.Tag>{bread}</Styled.Tag>
             </Styled.MidInfo>
             <Styled.Rating>
               <Styled.UserScore>
                 <Styled.StarIcon>
-                  <FaStar className="star" />
+                  <AiFillStar className="star" />
                 </Styled.StarIcon>
                 {shopAverageRating} ({reviewCount})
               </Styled.UserScore>
               <Styled.Slash>|</Styled.Slash>
               <Styled.HeartIcon>
-                <FiHeart className="heart" />
+                <BsHeartFill className="heart" />
               </Styled.HeartIcon>
               {likeCount}
             </Styled.Rating>
@@ -48,7 +49,9 @@ const ProductItem = ({ store }) => {
             <Styled.WhoLiked>
               <Styled.LikedNum>{likeCount}</Styled.LikedNum>명이 추천했습니다.
             </Styled.WhoLiked>
-            <Styled.Reviewer>by.{reviewByUser}</Styled.Reviewer>
+            <Styled.Reviewer>
+              by.{reviewByNickname ? reviewByNickname[0] : '없음'}
+            </Styled.Reviewer>
           </Styled.ReviewInfo>
         </Styled.ReviewContainer>
       </Styled.BreadContainer>

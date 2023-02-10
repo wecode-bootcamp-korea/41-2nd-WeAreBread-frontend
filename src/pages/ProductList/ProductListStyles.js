@@ -4,6 +4,7 @@ export const Background = styled.div`
   background-color: #f0f0f0;
   ${({ theme }) => theme.common.flexCenterColumn};
   min-height: calc(100vh - 206px);
+  padding-top: 100px;
 `;
 
 export const Body = styled.div`
@@ -38,7 +39,7 @@ export const Order = styled.button`
   border-radius: 6px;
   width: auto;
   height: 40px;
-  background-color: #9eb2ae;
+  background-color: #fca62f;
   color: white;
   margin-left: 20px;
   --size: 15px;
@@ -47,10 +48,10 @@ export const Order = styled.button`
   transition: all ease 1s;
 
   &:hover {
-    background-color: #1e5858;
+    background-color: #f98824;
   }
   &:focus {
-    background-color: #1e5858;
+    background-color: #f98824;
   }
 `;
 
@@ -107,11 +108,6 @@ export const SubTitle = styled.div`
 
 export const SubInfo = styled.div`
   display: flex;
-`;
-
-export const PlaceCount = styled.div`
-  color: ${({ theme }) => theme.color.redBrown};
-  font-weight: bold;
 `;
 
 export const ShareIcon = styled.button`

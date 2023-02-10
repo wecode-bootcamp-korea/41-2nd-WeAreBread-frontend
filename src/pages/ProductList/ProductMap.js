@@ -9,9 +9,6 @@ import * as ReactDOM from 'react-dom';
 import { useMap, Map, MapMarker, AbstractOverlay } from 'react-kakao-maps-sdk';
 import styled from 'styled-components';
 
-// TODO : 통신
-// TODO : 필터 기능?
-
 const TooltipMarker = ({ position, tooltipText }) => {
   const map = useMap();
   const node = useRef(document.createElement('div'));
@@ -251,44 +248,39 @@ const TooltipMarker = ({ position, tooltipText }) => {
 };
 
 /*global kakao*/
-const ProductMap = ({ mapCenter, currentLocation, geoLocationError }) => {
-  const data = [
-    { position: { lat: 33.450707, lng: 126.570678 }, name: '바게트' },
-    { position: { lat: 37.402054, lng: 127.108209 }, name: '프레첼' },
-    { position: { lat: 37.402827, lng: 127.107292 }, name: '소금빵' },
-  ];
-
+const ProductMap = ({ mapCenter, currentLocation, geoLocationError, item }) => {
   return (
     <S.Wrapper>
-      <Map
-        center={mapCenter}
-        isPanto={true}
-        style={{
-          border: 'none',
-          borderRadius: '14px',
-          marginLeft: '35px',
-          width: '1000px',
-          height: '450px',
-        }}
-        level={5}
-      >
-        {!geoLocationError && currentLocation ? (
-          <MapMarker position={currentLocation} />
-        ) : (
-          <></>
-        )}
-        {data.map(markerData => (
-          <TooltipMarker
-            key={`TooltipMarker-${markerData.name}`}
-            position={markerData.position}
-            tooltipText={markerData.name}
-          />
-        ))}
-      </Map>
+      {mapCenter.lat !== 0 && (
+        <Map
+          center={mapCenter}
+          isPanto={true}
+          style={{
+            border: 'none',
+            borderRadius: '14px',
+            marginLeft: '35px',
+            width: '1000px',
+            height: '450px',
+          }}
+          level={6}
+        >
+          {!geoLocationError && currentLocation ? (
+            <MapMarker position={currentLocation} />
+          ) : (
+            ''
+          )}
+          {item.map(markerData => (
+            <TooltipMarker
+              key={`TooltipMarker-${markerData.shopId}`}
+              position={{ lat: markerData.latitude, lng: markerData.longitude }}
+              tooltipText={markerData.shopName}
+            />
+          ))}
+        </Map>
+      )}
     </S.Wrapper>
   );
 };
-
 export default ProductMap;
 
 const S = {
@@ -307,7 +299,7 @@ const S = {
       border: 2px solid #333;
       font-size: 25px;
       font-weight: bold;
-      padding-left: 1px;
+      padding: 5px;
       left: 65px;
       top: 14px;
       border-radius: 5px;

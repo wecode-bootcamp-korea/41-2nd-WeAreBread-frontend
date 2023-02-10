@@ -15,11 +15,11 @@ export const BreadContainer = styled(Link)`
   border: none;
   border-radius: 14px;
   padding: 0;
-  background-color: #9eb2ae;
+  background-color: #fcb44d;
   transition: all ease 1s;
 
   &:hover {
-    background-color: #1e5858;
+    background-color: #f98824;
     transform: scale(1.03, 1.03);
   }
 `;
@@ -70,32 +70,43 @@ export const Category = styled.div``;
 export const Tag = styled.div``;
 
 export const Rating = styled.div`
-  ${({ theme }) => theme.common.flexCenter};
+  display: flex;
+  align-items: center;
 `;
 
-export const UserScore = styled.div``;
+export const UserScore = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export const StarIcon = styled.span`
   path {
-    color: #ffa300;
+    color: yellow;
   }
-  margin-right: 3px;
+  display: flex;
+  align-items: center;
+  margin-top: 3px;
+  margin-right: 2px;
   .star {
-    --size: 15px;
+    --size: 25px;
     width: var(--size);
     height: var(--size);
   }
 `;
 export const Slash = styled.div`
-  --size: 3px;
+  --size: 10px;
   margin-left: var(--size);
   margin-right: var(--size);
 `;
 
 export const HeartIcon = styled.div`
-  ${({ theme }) => theme.common.flexCenter};
-  margin-right: 3px;
-  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  margin-right: 5px;
+  path {
+    color: #ff4c4c;
+  }
   .heart {
   }
 `;
